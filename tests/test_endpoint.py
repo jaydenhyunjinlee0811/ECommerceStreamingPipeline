@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 _=load_dotenv()
 
 @pytest.fixture(scope='module')
-def urlEndpoint():
-    return os.environ.get('API_ENDPOINT')
+def postEndpoint():
+    return os.environ.get('POST_ENDPOINT')
 
 @pytest.fixture(scope='module')
 def payload():
@@ -22,12 +22,12 @@ def payload():
         "Country":"United Kingdom"
     }
 
-def test_response(urlEndpoint, payload):
+def test_post(postEndpoint, payload):
     '''
     Ensure API Endpoint exists prior to making POST request from client
     '''
     response = requests.post(
-        url=urlEndpoint,
+        url=postEndpoint,
         json=payload
     )
 
