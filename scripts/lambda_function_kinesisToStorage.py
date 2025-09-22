@@ -1,6 +1,8 @@
 import json
 import base64
 import boto3
+from io import StringIO
+from csv import DictWriter
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -100,14 +102,20 @@ def lambda_handler(event, context):
             numInvoice+=1
 
     if batchRecs:
-        # Make a string out of the list. Backslash n for new line in the s3 file
-        dataStream = json.dumps(batchRecs, indent=2)
+        print('Writing out Invoice data')
+        dataStream = StringIO()
+        writer = DictWriter(
+            dataStream,
+            fieldnames=['InvoiceNo', 'StockCode', 'Description', 'Quantity', 'InvoiceDate', 'UnitPrice', 'CustomerID', 'Country']
+        )
+        _ = writer.writeheader()
+        _ = writer.writerows(batchRecs)
 
         # Put the file into the s3 bucket
         _ = s3Client.put_object(
-            Body=dataStream, 
+            Body=dataStream.getvalue(), 
             Bucket='jlee-kinesis-target-bucket', 
-            Key=f'fromKinesis/output-{dtStr}.json'
+            Key=f'fromKinesis/output-{dtStr}.txt'
         )
 
     return f'Successfully uploaded {numUsers} User records and {numInvoice} invoice data.'
