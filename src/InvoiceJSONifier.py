@@ -1,6 +1,6 @@
 import csv 
 
-class JSONifier:
+class InvoiceJSONifier:
     @classmethod 
     def run(
         cls, 
@@ -23,6 +23,7 @@ class JSONifier:
                 if row.get("CustomerID"):
                     row['CustomerID'] = int(row['CustomerID'])
 
+                row['source'] = 'Invoice'
                 lst.append(row)
 
         return lst

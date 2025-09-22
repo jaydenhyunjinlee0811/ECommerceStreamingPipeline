@@ -1,23 +1,22 @@
 import os
+import json
 import requests
 from dotenv import load_dotenv
 
-from src import JSONifier
+from src import collectData
 
 _=load_dotenv()
-WORKDIR = os.path.abspath(os.path.dirname(__file__))
-DATADIR = os.path.join(WORKDIR, 'data')
 
 if __name__ == '__main__':
-    # jsonPayload = JSONifier.run(
-    #     sourceFp=os.path.join(DATADIR, 'sample.csv')
-    # )
-
-    # Dev
-    jsonPayload = JSONifier.run(
-        sourceFp=os.path.join(DATADIR, 'sample.csv')
+    # Fetch User Profile data and Invoice data info from host app
+    payloads = collectData(
+        userSource=os.getenv('USER_SOURCE'),
+        invoiceSource=os.getenv('INVOICE_SOURCE')
     )
-    for payload in jsonPayload:
+    
+    for payload in payloads:
+        print(json.dumps(payload, indent=2))
+        # POST to Endpoint
         response = requests.post(
             url=os.environ.get('POST_ENDPOINT'),
             json=payload
