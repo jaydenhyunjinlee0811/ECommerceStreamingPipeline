@@ -1,0 +1,79 @@
+[
+  {
+    "UserId": "user_1001",
+    "Email": "nicole01@yahoo.com",
+    "Name": "Stephen",
+    "Preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": false,
+        "sms": false
+      }
+    },
+    "Bookmarks": [
+      "doc879",
+      "doc350",
+      "doc566"
+    ]
+  },
+  {
+    "UserId": "user_1002",
+    "Email": "marianelson@oliver-chavez.com",
+    "Name": "Bryan",
+    "Preferences": {
+      "theme": "dark",
+      "notifications": {
+        "email": true,
+        "sms": true
+      }
+    },
+    "FeatureFlags": {
+      "betaUI": true,
+      "recommendations": true
+    },
+    "SocialLinks": {
+      "twitter": "@oscarjohnson"
+    },
+    "Bookmarks": [
+      "doc968"
+    ]
+  },
+  {
+    "UserId": "user_1003",
+    "Email": "cameronbrown@nguyen.com",
+    "Name": "Arthur",
+    "Preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "sms": true
+      }
+    },
+    "Bookmarks": [
+      "doc261"
+    ]
+  },
+  {
+    "UserId": "user_1004",
+    "Email": "xmorton@gmail.com",
+    "Name": "Dana",
+    "Preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": false,
+        "sms": true
+      }
+    },
+    "FeatureFlags": {
+      "betaUI": true,
+      "recommendations": false
+    },
+    "SocialLinks": {
+      "twitter": "@nicoleespinoza"
+    },
+    "Bookmarks": [
+      "doc714",
+      "doc531"
+    ]
+  }
+]

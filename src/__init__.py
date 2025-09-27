@@ -8,9 +8,10 @@ def collectData(
 ):
     payloads = list()
 
-    # User data 
+    # Mock User data 
+    # Assume 10 User records flow in at every runtime
     with open(userSource, 'r') as f:
-        payloads+=json.load(f)[:10]
+        payloads+=json.load(f)[:100]
         for payload in payloads:
             payload['source'] = 'Users'
 

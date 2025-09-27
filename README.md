@@ -2,20 +2,38 @@
 ## Author: Jayden Lee
 
 This repository shows cross-platform ETL/ELT Data Pipeline Architecture that transfers processed data from client machine to DynamoDB Table and S3 bucket.
+<img src='img/dataLineage.png'>
 
 ### Table of Contents
+* [How To](#how-to)
 * [Data Pipeline](#data-pipeline)
 * [Development Steps](#development-steps)
+
+----
+
+### How To
+- Install all Python libraries needed to run the application with `poetry`
+```python
+poetry install
+```
+- Set appropriate values to all environment variables listed in `.env` file
+    - `POST_ENDPOINT`: URL to POST API Endpoint created on host AWS VPC
+    - `USER_SOURCE`: Filepath to mock Users data; sample is provided under `samples/sampleUsers.json`
+    - `INVOICE_SOURCE`: Filepath to mock Invoice data([Source](https://www.kaggle.com/datasets/tunguz/online-retail?resource=download)); sample is provided under `samples/sampleInvoice.csv`
+
+----
 
 ### Data Pipeline
 - Designed pipeline collects, transforms, and loads data from local machine to AWS cloud environment
 - Two different *mock data* sources: Invoice data and Users data
-    - Each record in Invoice data([Source](https://www.kaggle.com/datasets/tunguz/online-retail?resource=download)) stores details of each item purchased in the order, such as invoice number of order, stockcode of purchased item, buyer's name, ..etc
+    - Each record in Invoice data stores details of each item purchased in the order, such as invoice number of order, stockcode of purchased item, buyer's name, ..etc
         - Hence, no UNIQUENESS is enforced as single order can contain multiple items, leading to duplicate order number, buyer's name, invoice date, ..etc
     
     - Each record in Users data represents user input data collected from feature flag(A/B testing) survey application; not all fields were required to be filled by answerers
         - UNIQUENESS is enforced with UserId field
         - Records can be in varying dimensionality; some records can contain more attributes than others
+
+----
 
 ### Development Steps
 1. I first created AWS REST API Endpoint Resouce as a front door URL to receive data that flows into AWS environment
